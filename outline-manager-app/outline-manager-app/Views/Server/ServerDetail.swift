@@ -21,18 +21,14 @@ struct ServerDetail: View {
     @State private var isAddingKey = false
     @State private var newName: String = ""
 
-    
     var body: some View {
         NavigationView {
-            
             VStack {
                 // Отобразите информацию о сервере
                 Text("\(server.name)")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color("AccentColor"))
-    //            Text("API URL: \(server.apiUrl)")
-                
                 // Отобразите информацию о доступных ключах
                 if !accessKeys.isEmpty {
                     ForEach(accessKeys, id: \.id) { accessKey in
@@ -84,8 +80,16 @@ struct ServerDetail: View {
                     primaryButton: .destructive(Text("Удалить")) {
                         if let selectedAccessKey = selectedAccessKey {
                             // Добавьте код для удаления ключа из массива accessKeys
-                            print("Delete request for key:", selectedAccessKey)
-//                            accessKeys.removeAll { $0.id == selectedAccessKey.id }
+                            deleteAccessKey(apiUrl: server.apiUrl, keyId: selectedAccessKey.id) { keyId in
+                                if let keyId = keyId {
+                                    // Обработка ошибки при удалении ключа
+                                    print("Key \(keyId) deleted successfully")
+                                    accessKeys.removeAll { $0.id == selectedAccessKey.id }
+                                } else {
+                                    // Успешно удалено
+                                    print("Error deleting key")
+                                }
+                            }
                         }
                     },
                     secondaryButton: .cancel()
@@ -100,8 +104,6 @@ struct ServerDetail: View {
             }
             )
             .sheet(isPresented: $isAddingKey) {
-                // TODO: сделать в отдельной вьюхе
-                // TODO: сделать валидацию url
                 
                 NavigationView {
                     Form {
@@ -115,9 +117,17 @@ struct ServerDetail: View {
                             isAddingKey = false // Закрыть окно добавления
                         },
                         trailing: Button("Добавить") {
-                            print("request to create")
-                            newName = ""
-                            isAddingKey = false // Закрыть окно добавления
+                            createNewKeyWithName(apiUrl: server.apiUrl, name: newName) { newKey in
+                                if let newKey = newKey {
+                                    newName = ""
+                                    isAddingKey = false // Закрыть окно добавления
+                                    accessKeys.append(newKey)
+                                    print("key was added", newKey)
+                                }
+                                else{
+                                    print("key was not added")
+                                }
+                            }
                         }
                     )
                     .navigationBarTitle("Добавить ключ")
