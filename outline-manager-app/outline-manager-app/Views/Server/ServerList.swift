@@ -13,6 +13,10 @@ struct ServerList: View {
     @State private var newApiUrl: String = ""
     @State private var isAddingServer = false
 
+    func deleteServers(at offsets: IndexSet) {
+        serverManager.servers.remove(atOffsets: offsets)
+    }
+
     var body: some View {
         NavigationView {
             VStack {
@@ -24,6 +28,7 @@ struct ServerList: View {
                             ServerRow(server: server)
                         }
                     }
+                    .onDelete(perform: deleteServers)
                 }
                 .navigationTitle("Servers")
                 .navigationBarItems(trailing:
