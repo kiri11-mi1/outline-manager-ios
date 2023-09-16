@@ -111,7 +111,7 @@
 		A52D1CDD2AA38027006A07A5 /* outline-manager-app */ = {
 			isa = PBXGroup;
 			children = (
-				A569EA222AAECF8F004959C8 /* Resources */,
+				A595A8872AB5F91700AD2C01 /* Helpers */,
 				A52DF9FC2AAC2E0400D5EE9B /* Models */,
 				A52DF9F72AAC2B6900D5EE9B /* Views */,
 				A52D1CDE2AA38027006A07A5 /* outline_manager_appApp.swift */,
@@ -163,16 +163,16 @@
 				A52DF9FF2AAC2E2C00D5EE9B /* Server.swift */,
 				A569EA232AAED5D8004959C8 /* ModelData.swift */,
 				A5B12EDA2AAF582400BFE037 /* AccessKey.swift */,
-				A5B12EDC2AAF5F4E00BFE037 /* ServerApi.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		A569EA222AAECF8F004959C8 /* Resources */ = {
+		A595A8872AB5F91700AD2C01 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A5B12EDC2AAF5F4E00BFE037 /* ServerApi.swift */,
 			);
-			path = Resources;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		A5B12EDE2AAF6DCC00BFE037 /* Key */ = {
