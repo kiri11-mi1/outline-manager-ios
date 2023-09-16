@@ -20,6 +20,9 @@ struct ServerDetail: View {
     
     @State private var isAddingKey = false
     @State private var newName: String = ""
+    
+    @State private var editingKeyName: String = ""
+    @State private var isEditingName = false
 
     var body: some View {
         NavigationView {
@@ -58,7 +61,10 @@ struct ServerDetail: View {
                     title: Text("Выберите действие"),
                     buttons: [
                         .default(Text("Изменить")) {
-                            // Добавьте код для редактирования ключа
+                            if let selectedAccessKey = selectedAccessKey {
+                                editingKeyName = selectedAccessKey.name
+                                isEditingName = true
+                            }
                         },
                         .default(Text("Копировать ссылку")) {
                             if let selectedAccessKey = selectedAccessKey {
@@ -95,10 +101,38 @@ struct ServerDetail: View {
                     secondaryButton: .cancel()
                 )
             }
+            .sheet(isPresented: $isEditingName) {
+                NavigationView {
+                    Form {
+                        Section(header: Text("Изменить имя ключа")) {
+                            TextField("Введите новое название", text: $editingKeyName)
+                                .autocapitalization(.none)
+                        }
+                    }
+                    .navigationBarItems(
+                        leading: Button("Отмена") {
+                            isEditingName = false
+                        },
+                        trailing: Button("Сохранить") {
+                            if let selectedAccessKey = selectedAccessKey {
+                                updateAccessKeyName(apiUrl: server.apiUrl, existingKey: selectedAccessKey, newName: editingKeyName) { updatedAccessKey in
+                                    if let updatedAccessKey = updatedAccessKey {
+                                       if let index = accessKeys.firstIndex(where: { $0.id == selectedAccessKey.id }) {
+                                           accessKeys[index] = updatedAccessKey
+                                       }
+                                        isEditingName = false
+                                    }
+                                }
+                            }
+                        }
+                    )
+                    .navigationBarTitle("Изменить имя ключа")
+                }
+            }
             
             .navigationBarItems(trailing:
                                     Button(action: {
-                isAddingKey = true // Показать всплывающее окно при нажатии кнопки
+                isAddingKey = true
             }) {
                 Text("Добавить новый ключ")
             }
