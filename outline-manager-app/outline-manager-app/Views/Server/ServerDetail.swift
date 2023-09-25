@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ServerDetail: View {
-//    @EnvironmentObject var serverManager: ServerManager
     var server: Server
     
     @State private var accessKeys: [AccessKey] = []
