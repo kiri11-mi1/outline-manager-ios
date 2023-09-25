@@ -46,7 +46,7 @@ struct ServerList: View {
                         Form {
                             Section(header: Text("Новый сервер")) {
                                 TextField("Наименование сервера", text: $newName)
-                                TextField("http://", text: $newApiUrl)
+                                TextField("https://server-ip/api-token", text: $newApiUrl)
                                     .autocapitalization(.none)
                             }
                         }
