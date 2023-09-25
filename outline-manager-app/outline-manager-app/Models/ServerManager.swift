@@ -31,10 +31,12 @@ final class ServerManager: ObservableObject {
         }
     }
     
-    private func loadServers() {
+    func loadServers() {
         if let savedData = UserDefaults.standard.data(forKey: "savedServers"),
            let decodedServers = try? JSONDecoder().decode([Server].self, from: savedData) {
-            servers = decodedServers
+            DispatchQueue.main.async { // Выполняем асинхронно на главной очереди
+                self.servers = decodedServers
+            }
         }
     }
 }
