@@ -65,6 +65,10 @@ struct ServerList: View {
                     }
                 }
             }
+            .onAppear {
+                // Загрузка данных при отображении вью
+                serverManager.loadServers()
+            }
         }
     }
 }
