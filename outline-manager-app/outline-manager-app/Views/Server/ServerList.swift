@@ -14,7 +14,10 @@ struct ServerList: View {
     @State private var isAddingServer = false
 
     func deleteServers(at offsets: IndexSet) {
-        serverManager.servers.remove(atOffsets: offsets)
+        for index in offsets {
+            let serverForDelete = serverManager.servers[index]
+            serverManager.removeServer(withUUID: serverForDelete.id)
+        }
     }
 
     var body: some View {
