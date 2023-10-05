@@ -38,33 +38,14 @@ struct ServerList: View {
                                         Button(action: {
                     isAddingServer = true // Показать всплывающее окно при нажатии кнопки
                 }) {
-                    Text("Добавить новый сервер")
+                    Text("Add new server")
                 }
                 )
                 .sheet(isPresented: $isAddingServer) {
-                    // TODO: сделать в отдельной вьюхе
-                    // TODO: сделать валидацию url
-                    
-                    NavigationView {
-                        Form {
-                            Section(header: Text("Новый сервер")) {
-                                TextField("Наименование сервера", text: $newName)
-                                TextField("https://server-ip/api-token", text: $newApiUrl)
-                                    .autocapitalization(.none)
-                            }
-                        }
-                        .navigationBarItems(
-                            leading: Button("Отмена") {
-                                isAddingServer = false // Закрыть окно добавления
-                            },
-                            trailing: Button("Добавить") {
-                                serverManager.addServer(name: newName, apiUrl: newApiUrl)
-                                newName = ""
-                                newApiUrl = ""
-                                isAddingServer = false // Закрыть окно добавления
-                            }
-                        )
-                        .navigationBarTitle("Добавить сервер")
+                    AddServer(newName: $newName, newApiUrl: $newApiUrl, isAddingServer: $isAddingServer) {
+                        serverManager.addServer(name: newName, apiUrl: newApiUrl)
+                        newName = ""
+                        newApiUrl = ""
                     }
                 }
             }
