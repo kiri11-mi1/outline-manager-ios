@@ -9,6 +9,8 @@ simple ios outline manager
   <img src="./images/server_lists.png" height="400" width="" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="./images/create_server.png" height="400" width="" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./images/delete_server.png" height="400" width="" />
 </p>
 
 ### Keys
