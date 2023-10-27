@@ -19,9 +19,7 @@ simple ios outline manager
   <img src="./images/key_list.png" height="400" width="" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="./images/keys_options.png" height="400" width="" />
-</p>
-
-<p float="left">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="./images/new_key.png" height="400" width="" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="./images/change_key.png" height="400" width="" />
